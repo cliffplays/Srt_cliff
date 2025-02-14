@@ -1,0 +1,358 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-color);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Add space between the nav section and the other content */
+    background-color: var(--base-color);
+    overscroll-behavior-x: none; /* Prevent horizontal scroll on iOS */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0); /* Transparent background */
+    backdrop-filter: blur(3px); /* Blurred glass effect */
+    position: fixed; /* Make the nav section fixed */
+    top: 0;
+    width: 95%;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.brand-text {
+    margin-left: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 17px;
+    overflow: hidden;
+    width: 88%; /* Ensure the card title covers 90% of the width */
+    height: auto;
+    max-width: 1200px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 1cm;
+    background-color: var(--base-variant);
+}
+
+.card-image-container {
+    flex: 1;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    flex: 2;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.card-content h2 {
+    margin-top: 0;
+    word-wrap: break-word; /* Ensure long words break to the next line */
+}
+
+.card-content p {
+    margin: 10px 0 0;
+}
+
+.highlights {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.highlight-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.highlight-card {
+    border: 1px solid #ccc;
+    border-radius: 17px;
+    overflow: hidden;
+    width: 20%;
+    height: 40vh;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.336);
+    text-align: center;
+    background-color: var(--base-variant);
+}
+
+.highlight-card img {
+    width: 100%;
+    height: auto;
+}
+
+.products {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 17px;
+    overflow: hidden;
+    width: 20%;
+    height: 100%; /* Adjusted height to ensure content is visible */
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px; /* Added padding to ensure content is visible */
+    background-color: var(--base-variant);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 17px 17px 0;
+}
+
+.product-card h3 {
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+.product-card p {
+    margin: 10px 0;
+    color: var(--text-color);
+}
+
+.buy-now {
+    background: rgba(252, 222, 184, 0.301); /* Transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass-like blur */
+    color: var(--text-color); /* Changed text color to black */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px; /* Added margin to ensure button is visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow for visibility */
+}
+
+.buy-now:hover {
+    background: rgba(51, 76, 77, 0.473); /* Slightly more opaque on hover */
+    color: rgb(0, 255, 234);
+    scale: 1.05; /* Slightly increase size on hover */
+    transition: ease-in-out 0.2s; /* Smooth transition */
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 25%; /* Set width to 80% of the screen */
+        text-align: center;
+        position: fixed; /* Make the navbar items stick at the top */
+        top: 3px;
+        left: 53%; /* Center the container */
+        background: rgba(3, 3, 3, 0.521); /* Blackish background */
+        backdrop-filter: blur(10px); /* Blurred glass effect */
+        border-radius: 10px; /* Add border radius for card effect */
+        padding: 20px; /* Add padding inside the container */
+        z-index: 1;
+        overflow: hidden; /* Make the navbar non-scrollable */
+    }
+
+    .nav-links.active {
+        display: flex;
+        overflow: hidden; /* Ensure the nav menu popup is non-scrollable */
+        backdrop-filter: blur(10px); /* Ensure the nav menu popup has a blur effect */
+    }
+
+    .nav-links a {
+        color: white; /* Change text color to white */
+    }
+
+    .hamburger {
+        display: flex; /* Ensure the hamburger menu is displayed on mobile */
+        position: fixed; /* Make the hamburger menu stick at the top */
+        top: 20px;
+        right: 20px;
+        z-index: 2; /* Ensure it stays above other elements */
+    }
+
+    .nav-left {
+        position: fixed; /* Make the brand text and icon stick at the top */
+        top: 20px;
+        left: 20px;
+        z-index: 2; /* Ensure it stays above other elements */
+    }
+
+    .highlight-card, .product-card {
+        width: 35%; /* Set width to 35% to fit two cards per row */
+    }
+    .product-cards {
+        justify-content: space-between; /* Ensure cards are spaced evenly */
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product-card {
+        width: 100%; /* Set width to 100% to fit one card per row */
+        margin: 0 0 10px 0; /* Add margin to prevent overlapping */
+    }
+    body {
+        font-size: 15px; /* Reduce font size to normal iOS size */
+        overflow-x: hidden; /* Disable horizontal scroll */
+    }
+    h2, h3 {
+        font-size: 1.2em; /* Adjust heading font size */
+    }
+    p {
+        font-size: 1em; /* Adjust paragraph font size */
+    }
+    .card {
+        max-width: 260px; /* Set maximum width to 280px on mobile */
+        margin-top: 80px; /* Add space between the nav section and the card title on mobile */
+    }
+    .card-content h2 {
+        font-size: 1.em; /* Adjust font size for mobile */
+        word-wrap: break-word; /* Ensure long words break to the next line */
+    }
+    .card-image {
+        width: 100%; /* Ensure the card image is larger on mobile */
+        height: auto;
+    }
+    nav {
+        width: 95%; /* Ensure the nav section width is 95% on mobile */
+    }
+}
+
+@media (max-width: 500px) {
+    .product-card {
+        max-width: 140px; /* Set maximum width to 100px if screen size is less than 500px */
+    }
+}
+
+:root {
+    --base-color: rgb(255, 250, 243);
+    --base-variant: rgba(255, 255, 255, 0.849);
+    --text-color: black;
+    --secondary-text: white;
+    --primary-color: white;
+    --accent-color: rgb(0, 255, 234);
+}
+
+.darkmode {
+    --base-color: rgb(24, 24, 24);
+    --base-variant: rgb(39, 39, 39);
+    --text-color: rgb(255, 242, 231);
+    --secondary-text: black;
+    --primary-color: rgb(0, 0, 0);
+    --accent-color: rgb(0, 255, 234);
+}
+
+.dark-mode-switch {
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--base-variant);
+    color: var(--text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode-switch:hover {
+    background-color: var(--accent-color);
+    color: var(--secondary-text);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--base-variant);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+    border: 3px solid var(--base-variant);
+}
+
+/* 
+body {
+    background-image: url('bg1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+*/

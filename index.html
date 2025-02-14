@@ -1,0 +1,292 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>srtcliff</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+                overflow-x: hidden; /* Disable horizontal scroll */
+            }
+            .card-image {
+                width: 100%;
+                height: auto;
+            }
+            .modal-content {
+                width: 95%; /* Full width on mobile */
+                height: 80%; /* Adjust height for mobile */
+            }
+            .preview-images img {
+                width: 100%; /* Ensure the image width is 100% */
+                height: auto; /* Ensure the image height is auto */
+            }
+        }
+        body {
+            overflow-x: hidden; /* Disable horizontal scroll on iOS Safari */
+            overscroll-behavior-x: none; /* Prevent horizontal scroll on iOS */
+        }
+        html {
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* Centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            height: 70%; /* Adjust height */
+        }
+        .modal-content.darkmode {
+            background-color: #333;
+            color: white;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .preview-images {
+            display: flex;
+            overflow-x: scroll;
+            height: 100%; /* Full height */
+        }
+        .preview-images img {
+            width: 100%;
+            max-width: 100%; /* Show one image at a time */
+            height: auto; /* Ensure the image height is auto */
+            margin-right: 10px;
+        }
+        .modal .buy-now {
+            background-color: #28a745; /* Green background */
+            color: white; /* White text */
+        }
+        .modal .buy-now:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body class="darkmode">
+    <nav style="position: fixed; top: 0; width: 90%; z-index: 1000;">
+        <div class="nav-left">
+            <img src="logo.png" alt="Icon" class="nav-icon">
+            <span class="brand-text">CliffplaysEnt</span>
+            <button class="dark-mode-switch" onclick="toggleDarkMode()">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+            <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+            <li><a href="services.html" onclick="toggleMenu()">Services</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </nav>
+    <div style="margin-top: 60px;"></div>
+    <div class="card">
+        <div class="card-image-container">
+            <img src="logo.png" alt="Card Image" class="card-image">
+        </div>
+        <div class="card-content">
+            <h2>Welcome</h2>
+            <p>**Safety First,Always**  
+                <br>
+                We prioritize your safety, making buying secure and effortless. Shop with confidence, knowing every step is protected.
+            </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Scroll Down</p>
+                <a href="#" onclick="scrollDownHalfway(event)">
+                    <i class="fas fa-arrow-down" style="font-size: 24px; color: var(--text-color);"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <section class="products">
+        <h2>Highlights</h2>
+        <div class="product-cards">
+            <div class="product-card">
+                <img src="item1.jpg" alt="Product 1" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 1</h3>
+                <p>Product 1 description</p>
+                <button class="buy-now" onclick="openModal('Product 1')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item2.jpg" alt="Product 2" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 2</h3>
+                <p>Product 2 description</p>
+                <button class="buy-now" onclick="openModal('Product 2')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item3.jpg" alt="Product 3" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 3</h3>
+                <p>Product 3 description</p>
+                <button class="buy-now" onclick="openModal('Product 3')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item4.jpg" alt="Product 4" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 4</h3>
+                <p>Product 4 description</p>
+                <button class="buy-now" onclick="openModal('Product 4')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item5.jpg" alt="Product 5" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 5</h3>
+                <p>Product 5 description</p>
+                <button class="buy-now" onclick="openModal('Product 5')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item6.jpg" alt="Product 6" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 6</h3>
+                <p>Product 6 description</p>
+                <button class="buy-now" onclick="openModal('Product 6')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item7.jpg" alt="Product 7" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 7</h3>
+                <p>Product 7 description</p>
+                <button class="buy-now" onclick="openModal('Product 7')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+            <div class="product-card">
+                <img src="item8.jpg" alt="Product 8" class="product-image" onerror="this.onerror=null;this.src='sold.jpg';">
+                <h3>Product 8</h3>
+                <p>Product 8 description</p>
+                <button class="buy-now" onclick="openModal('Product 8')">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="preview-images">
+                <img src="item1a.jpg" alt="Product Image A">
+                <img src="item1b.jpg" alt="Product Image B">
+                <img src="item1c.jpg" alt="Product Image C">
+                <img src="item1d.jpg" alt="Product Image D">
+                <img src="item1e.jpg" alt="Product Image E">
+            </div>
+            <button class="buy-now" id="whatsappButton">
+                <i class="fab fa-whatsapp"></i> Buy Now
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('darkmode');
+            const button = document.querySelector('.dark-mode-switch i');
+            const modalContent = document.querySelector('.modal-content');
+            if (body.classList.contains('darkmode')) {
+                localStorage.setItem('theme', 'dark');
+                button.classList.remove('fa-moon');
+                button.classList.add('fa-sun');
+                modalContent.classList.add('darkmode');
+            } else {
+                localStorage.setItem('theme', 'light');
+                button.classList.remove('fa-sun');
+                button.classList.add('fa-moon');
+                modalContent.classList.remove('darkmode');
+            }
+        }
+
+        function scrollDownHalfway(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: window.scrollY + window.innerHeight / 2,
+                behavior: 'smooth'
+            });
+        }
+
+        function openModal(productName) {
+            const modal = document.getElementById("myModal");
+            const whatsappButton = document.getElementById("whatsappButton");
+            whatsappButton.onclick = function() {
+                window.open(`https://wa.me/254114873377?text=I%20want%20to%20buy%20${productName}`, '_blank');
+            };
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        // Load theme from local storage
+        window.onload = function() {
+            const theme = localStorage.getItem('theme');
+            const button = document.querySelector('.dark-mode-switch i');
+            const modalContent = document.querySelector('.modal-content');
+            if (theme === 'dark') {
+                document.body.classList.add('darkmode');
+                button.classList.remove('fa-moon');
+                button.classList.add('fa-sun');
+                modalContent.classList.add('darkmode');
+            } else {
+                document.body.classList.remove('darkmode');
+                button.classList.remove('fa-sun');
+                button.classList.add('fa-moon');
+                modalContent.classList.remove('darkmode');
+            }
+        }
+
+        // Close the modal when the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
